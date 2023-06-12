@@ -15,9 +15,10 @@ func main() {
 	con.Users = users
 
 	var (
-		dataLimit  int
-		page       int
-		searchName string
+		dataLimit      int
+		page           int
+		searchName     string
+		searchBirthday string
 	)
 	fmt.Println("Input Data Limit:")
 	fmt.Scan(&dataLimit)
@@ -46,11 +47,26 @@ func main() {
 	for {
 		fmt.Println("Enter a name for searching: ")
 		fmt.Scan(&searchName)
-		repUserName := con.GetList(searchName)
+		repUserName := con.GetListSearchByName(searchName)
 		for _, user := range repUserName.Users {
 			fmt.Println(user)
 		}
 
+		fmt.Println("Exit: 0")
+		fmt.Scan(&page)
+		if page == 0 {
+			break
+		}
+	}
+
+	for {
+		fmt.Println("Enter a birthday for searching: ")
+		fmt.Scan(&searchBirthday)
+
+		repUserBirth := con.GetListSearchByBirthday(searchName)
+		for _, user := range repUserBirth.Users {
+			fmt.Println(user)
+		}
 	}
 
 }

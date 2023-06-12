@@ -57,7 +57,7 @@ func (c *Controller) UserGetList(req *models.UserGetListRequest) *models.UserGet
 	return response
 }
 
-func (c *Controller) GetList(search string) *models.UserGetListResponse {
+func (c *Controller) GetListSearchByName(search string) *models.UserGetListResponse {
 	log.Printf("UserGetSearch for: %+v\n", search)
 	var (
 		response = &models.UserGetListResponse{}
@@ -89,4 +89,16 @@ func (c *Controller) GetList(search string) *models.UserGetListResponse {
 
 	return response
 
+}
+
+func (c *Controller) GetListSearchByBirthday(search string) *models.UserGetListResponse {
+	log.Printf("UserSearchByBirthday: %+v\n", search)
+	var response = &models.UserGetListResponse{}
+
+	for _, user := range c.Users {
+		if strings.Contains(user.Birthday, search) {
+			response.Users = append(response.Users, user)
+		}
+	}
+	return response
 }
